@@ -1,0 +1,21 @@
+[
+  {
+    "guid": "3edf84d9-7187-4a64-8ef4-68878d3351ce",
+    "name": "Collections Exploded",
+    "description": "Separate horizontal rows for every accessible collection containing the current media item, with shared administrator settings for sorting and item limits. Requires File Transformation 3.x matching your Jellyfin server version.",
+    "overview": "Every collection gets its own media row.",
+    "owner": "tommyvange",
+    "category": "General",
+    "imageUrl": "https://raw.githubusercontent.com/tommyvange/Jellyfin-Collections-Exploded/v1.0.3.0/assets/Jellyfin-Collections-Exploded.png",
+    "versions": [
+      {
+        "version": "1.0.3.0",
+        "changelog": "Use Jellyfin’s stock theme-controlled collection-heading arrow. Keep the native empty icon span and remove the extra literal chevron, so the active theme controls its appearance.\n\nUse Jellyfin’s native card renderer and row elements for theme compatibility.\n\n- Replace custom cards and scrolling CSS with the same card builder, section markup, emby-scroller, and emby-itemscontainer used by Jellyfin.\n- Include native play overlays, item menus, lazy images, keyboard behavior, and responsive card sizing.\n- Preserve the native Collections section when the guarded rendering bridge is unavailable.\n\nCollections Exploded for the server-hosted Jellyfin Web client.\n\n- Replace the combined Collections section on media detail pages with a separate linked row for every accessible containing collection.\n- Choose up to 100 items per row and sort by year, title, date added, or release date.\n- Preserve the native Collections section when configuration or membership discovery cannot complete.\n- Keep collection headings available for empty rows and failed previews, with retry controls for content requests.\n\nInstall File Transformation 3.x matching your Jellyfin server version before installing Collections Exploded. Restart Jellyfin and reload the web client after installation.\n\nRequires Jellyfin 12.0.0 or newer. Applies to the Jellyfin Web interface served by the server.",
+        "targetAbi": "12.0.0.0",
+        "sourceUrl": "https://github.com/tommyvange/Jellyfin-Collections-Exploded/releases/download/v1.0.3.0/Jellyfin.Plugin.CollectionsExploded_1.0.3.0_jellyfin-12.0.0.zip",
+        "checksum": "f2c0c88b2c8c794edfe35f5bd7dcbca6",
+        "timestamp": "2026-11-05T20:48:22.000Z"
+      }
+    ]
+  }
+]
