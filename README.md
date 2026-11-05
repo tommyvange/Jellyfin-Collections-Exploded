@@ -5,6 +5,12 @@
 [![Latest release](https://img.shields.io/github/v/release/tommyvange/Jellyfin-Collections-Exploded)](https://github.com/tommyvange/Jellyfin-Collections-Exploded/releases/latest)
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](LICENSE)
 
+> [!NOTE]
+> This plugin only changes the behaviour of the default Jellyfin Web interface, it does not do anything to third party clients.
+
+> [!WARNING]
+> This plugin requires IAmParadox27's [File Transformation](https://github.com/IAmParadox27/jellyfin-plugin-file-transformation) plugin.
+
 ![Collections Exploded](assets/Jellyfin-Collections-Exploded.png)
 
 Give every collection its own horizontal row on a media item's detail page. Each heading opens the collection, and its cards show the collection's contents in your chosen order.
