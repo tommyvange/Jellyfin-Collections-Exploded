@@ -1,0 +1,21 @@
+{
+  "guid": "3edf84d9-7187-4a64-8ef4-68878d3351ce",
+  "name": "Collections Exploded",
+  "assemblyName": "Jellyfin.Plugin.CollectionsExploded",
+  "imagePath": "assets/Jellyfin-Collections-Exploded.png",
+  "owner": "tommyvange",
+  "category": "General",
+  "overview": "Every collection gets its own media row.",
+  "description": "Separate horizontal rows for every accessible collection containing the current media item, with shared administrator settings for sorting and item limits. Requires File Transformation 3.x matching your Jellyfin server version.",
+  "minimumJellyfinVersion": "12.0.0",
+  "compatibility": {
+    "latestReleaseUrl": "https://api.github.com/repos/jellyfin/jellyfin/releases/latest",
+    "webPackageIndex": "https://repo.jellyfin.org/debian/dists/trixie/main/binary-amd64/Packages",
+    "baselineWebPackage": {
+      "version": "12.0.0",
+      "url": "https://repo.jellyfin.org/debian/pool/main/j/jellyfin/jellyfin-web_12.0%2Bdeb13_all.deb",
+      "sha256": "04d772074f87bcbaf408be877531ebd919b7d0d043071c4a09de3d45e3afde5c",
+      "size": 32059982
+    }
+  }
+}

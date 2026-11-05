@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+  <ItemGroup>
+    <FrameworkReference Include="Microsoft.AspNetCore.App" />
+    <Compile Include="../../src/Jellyfin.Plugin.CollectionsExploded/Transformations/IndexPatcher.cs" Link="IndexPatcher.cs" />
+    <Compile Include="../../src/Jellyfin.Plugin.CollectionsExploded/Transformations/NativeCardPatcher.cs" Link="NativeCardPatcher.cs" />
+    <Compile Include="../../src/Jellyfin.Plugin.CollectionsExploded/Services/WebAssetScanner.cs" Link="WebAssetScanner.cs" />
+    <Compile Include="../../src/Jellyfin.Plugin.CollectionsExploded/Services/TransformationRegistrationService.cs" Link="TransformationRegistrationService.cs" />
+    <Compile Include="../../src/Jellyfin.Plugin.CollectionsExploded/Configuration/PluginConfiguration.cs" Link="PluginConfiguration.cs" />
+    <Compile Include="../../src/Jellyfin.Plugin.CollectionsExploded/Configuration/EffectiveSettings.cs" Link="EffectiveSettings.cs" />
+    <Compile Include="../../src/Jellyfin.Plugin.CollectionsExploded/Controllers/ClientController.cs" Link="ClientController.cs" />
+    <Compile Include="../../src/Jellyfin.Plugin.CollectionsExploded/Services/EmbeddedAssets.cs" Link="EmbeddedAssets.cs" />
+    <Compile Include="../../src/Jellyfin.Plugin.CollectionsExploded/Transformations/TransformationRequest.cs" Link="TransformationRequest.cs" />
+    <Compile Include="../../src/Jellyfin.Plugin.CollectionsExploded/Transformations/WebTransformations.cs" Link="WebTransformations.cs" />
+    <EmbeddedResource Include="../../src/Jellyfin.Plugin.CollectionsExploded/Web/collections-exploded.js" LogicalName="Jellyfin.Plugin.CollectionsExploded.Web.collections-exploded.js" />
+    <EmbeddedResource Include="../../src/Jellyfin.Plugin.CollectionsExploded/Web/collections-exploded.css" LogicalName="Jellyfin.Plugin.CollectionsExploded.Web.collections-exploded.css" />
+  </ItemGroup>
+</Project>

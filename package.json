@@ -1,0 +1,17 @@
+{
+  "name": "jellyfin-collections-exploded",
+  "version": "1.0.3",
+  "private": true,
+  "description": "Individual collection rows on Jellyfin Web media detail pages.",
+  "scripts": {
+    "test": "node --test tests/*.test.cjs",
+    "test:server": "dotnet run --project tests/Server",
+    "build": "dotnet build src/Jellyfin.Plugin.CollectionsExploded -c Release",
+    "package": "node scripts/package.mjs",
+    "verify:web": "node scripts/verify-web.mjs",
+    "release:info": "node scripts/release-info.mjs"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

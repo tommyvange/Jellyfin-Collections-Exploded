@@ -1,0 +1,2 @@
+/* Cards, layout, scrollers and controls use Jellyfin’s native components. */
+.jfce-active #collectionsCollapsible { display: none !important; }

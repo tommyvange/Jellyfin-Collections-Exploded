@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Collections Exploded</title>
+</head>
+<body>
+    <div id="CollectionsExplodedConfigPage" data-role="page" class="page type-interior pluginConfigurationPage"
+         data-require="emby-input,emby-button,emby-checkbox,emby-select">
+        <div data-role="content">
+            <div class="content-primary">
+                <form id="CollectionsExplodedConfigForm">
+                    <div class="checkboxContainer checkboxContainer-withDescription">
+                        <label class="emby-checkbox-label">
+                            <input id="CollectionsExplodedEnabled" type="checkbox" is="emby-checkbox">
+                            <span>Enable Collections Exploded</span>
+                        </label>
+                        <div class="fieldDescription">Show a separate horizontal row of media for each collection containing the item.</div>
+                    </div>
+                    <div class="inputContainer">
+                        <label class="inputLabel inputLabelUnfocused" for="CollectionsExplodedMaximum">Maximum items per collection</label>
+                        <input id="CollectionsExplodedMaximum" type="number" is="emby-input" min="1" max="100" step="1" required>
+                        <div class="fieldDescription">Default: 20. Allowed range: 1–100. This limits each row; every accessible collection still gets a row.</div>
+                    </div>
+                    <div class="selectContainer">
+                        <label class="selectLabel" for="CollectionsExplodedSort">Sort collection contents</label>
+                        <select id="CollectionsExplodedSort" is="emby-select">
+                            <option value="ProductionYear:Ascending">Year: oldest first</option>
+                            <option value="ProductionYear:Descending">Year: newest first</option>
+                            <option value="SortName:Ascending">Title: A–Z</option>
+                            <option value="SortName:Descending">Title: Z–A</option>
+                            <option value="DateCreated:Descending">Date added: newest first</option>
+                            <option value="DateCreated:Ascending">Date added: oldest first</option>
+                            <option value="PremiereDate:Ascending">Release date: oldest first</option>
+                            <option value="PremiereDate:Descending">Release date: newest first</option>
+                        </select>
+                        <div class="fieldDescription">Sorting is applied before the item limit. Date added is the media item's library date. Unknown years follow Jellyfin's normal ordering.</div>
+                    </div>
+                    <p>Settings apply to all users of the server-hosted Jellyfin web client. Reopen or refresh a media detail page to apply saved changes.</p>
+                    <p>Requires Jellyfin 12 or newer and File Transformation 3 or newer.</p>
+                    <div id="CollectionsExplodedConfigError" role="alert" style="color:var(--theme-error-color,#f44336);display:none"></div>
+                    <button is="emby-button" type="submit" class="raised button-submit block"><span>Save</span></button>
+                </form>
+            </div>
+        </div>
+        <script>
+            (function () {
+                'use strict';
+                var pluginId = '3edf84d9-7187-4a64-8ef4-68878d3351ce';
+                var page = document.querySelector('#CollectionsExplodedConfigPage');
+                var form = page.querySelector('#CollectionsExplodedConfigForm');
+                var error = page.querySelector('#CollectionsExplodedConfigError');
+                var maximum = page.querySelector('#CollectionsExplodedMaximum');
+                var sorting = page.querySelector('#CollectionsExplodedSort');
+                var enabled = page.querySelector('#CollectionsExplodedEnabled');
+                var sortFields = ['ProductionYear', 'SortName', 'DateCreated', 'PremiereDate'];
+                var sortOrders = ['Ascending', 'Descending'];
+
+                function reportError(message) {
+                    error.textContent = message;
+                    error.style.display = '';
+                    Dashboard.hideLoadingMsg();
+                }
+
+                page.addEventListener('pageshow', function () {
+                    error.style.display = 'none';
+                    Dashboard.showLoadingMsg();
+                    ApiClient.getPluginConfiguration(pluginId).then(function (config) {
+                        enabled.checked = config.Enabled !== false;
+                        maximum.value = Number.isInteger(config.MaxItemsPerCollection)
+                            ? Math.max(1, Math.min(100, config.MaxItemsPerCollection)) : 20;
+                        sorting.value = (sortFields.indexOf(config.SortBy) >= 0 ? config.SortBy : 'ProductionYear')
+                            + ':' + (sortOrders.indexOf(config.SortOrder) >= 0 ? config.SortOrder : 'Ascending');
+                        Dashboard.hideLoadingMsg();
+                    }).catch(function () {
+                        reportError('Could not load the configuration. Reload this page to try again.');
+                    });
+                });
+
+                form.addEventListener('submit', function (event) {
+                    event.preventDefault();
+                    error.style.display = 'none';
+                    var limit = Number(maximum.value);
+                    var sort = sorting.value.split(':');
+                    if (!Number.isInteger(limit) || limit < 1 || limit > 100) {
+                        reportError('Enter a whole number between 1 and 100.');
+                        return;
+                    }
+                    if (sort.length !== 2 || sortFields.indexOf(sort[0]) < 0 || sortOrders.indexOf(sort[1]) < 0) {
+                        reportError('Choose a supported sorting option.');
+                        return;
+                    }
+                    Dashboard.showLoadingMsg();
+                    ApiClient.getPluginConfiguration(pluginId).then(function (config) {
+                        config.Enabled = enabled.checked;
+                        config.MaxItemsPerCollection = limit;
+                        config.SortBy = sort[0];
+                        config.SortOrder = sort[1];
+                        return ApiClient.updatePluginConfiguration(pluginId, config);
+                    }).then(function (result) {
+                        Dashboard.processPluginConfigurationUpdateResult(result);
+                    }).catch(function () {
+                        reportError('Could not save the configuration. Try again.');
+                    });
+                });
+            }());
+        </script>
+    </div>
+</body>
+</html>
